@@ -14,18 +14,22 @@
     <script type="text/jsx">
     
         var RahulsComponent = React.createClass({
+            doSomething : function(){
+            	alert("The text Displaying id : " + this.props.children);
+            },
             render: function() {
                 return (
-                        <h2> {this.props.user} like to eat {this.props.food} </h2>
+                        <div>
+                            <h3>{this.props.user}</h3>
+                            <a onClick={this.doSomething} href="#"> Click Me</a>
+                        </div>
                 );
             }
         });
 
         React.render(<div>
-        	<RahulsComponent user="Rahul" food="dosa"/>
-        	<RahulsComponent user="Sanyam" food="idli"/>
-        	<RahulsComponent user="Udit" food="pizza"/>
-        	<RahulsComponent user="Sumit" food="burger"/>
+        	<RahulsComponent user="Rahul"> This guy is Awesome</RahulsComponent>
+            <RahulsComponent user="Sanyam"> He is a good guy too.</RahulsComponent>
         </div>, document.getElementById('content'));
 
     </script>
