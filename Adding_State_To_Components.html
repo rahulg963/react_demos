@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React Event Handling</title>
+    <script src="http://fb.me/react-0.12.2.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Hello Everyone !!!</h1>
+    <div id="content"></div>
+
+    <script type="text/jsx">
+        var Comment = React.createClass({
+            getInitialState : function(){
+                return {editing : false}
+            },
+            edit : function(){
+                    this.setState({editing : true});
+                    //alert("Editing is being Done!");
+            },
+            save : function(){
+                var valu = this.refs.newText.value;
+                console.log("New Comment : " + valu);
+                this.setState({editing : false});
+            },
+            remove : function(){
+                    console.log('Removing comment');
+                    //alert("Remove is being done!");
+            },
+            renderNormal : function(){
+                return (
+                    <div>
+                        <div>{this.props.children}</div>
+                        <button onClick={this.edit}> Edit </button>
+                        <button onClick={this.remove}> Remove </button>
+                    </div>
+                );
+            },
+            renderForm : function(){
+                return (
+                    <div>
+                        <textarea ref="newText" defaultValue={this.props.children}></textarea>
+                        <button onClick={this.save}> Save </button>
+                    </div>
+                );
+            },
+            render : function(){
+                if(this.state.editing){
+                    return this.renderForm();
+                }else{
+                    return this.renderNormal();
+                }
+            }
+        });
+
+        React.render(
+            <div>
+                <Comment>Mango</Comment>
+                <Comment>Beans</Comment>
+                <Comment>Tuna</Comment>
+            </div>,document.getElementById('content')
+        );
+    </script>
+
+</body>
+</html>
